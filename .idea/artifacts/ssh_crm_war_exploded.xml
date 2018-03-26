@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ssh_crm:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ssh_crm_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ssh_crm/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ssh_crm" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Struts 2.3.24" />
+          <element id="library" level="project" name="Spring-4.3.14.RELEASE" />
+          <element id="library" level="project" name="Hibernate 4.2.2-4.2.2" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

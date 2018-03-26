@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--数据库url-->
+        <property name="connection.url">jdbc:mysql://192.168.203.128:3306/ssh_crm</property>
+        <!--数据库驱动-->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!--数据库连接用户名-->
+        <property name="connection.username">root</property>
+        <!--数据库连接密码-->
+        <property name="connection.password">root</property>
+
+        <!--配置hibernate的基本信息-->
+
+        <!--数据库方言  注意： MYSQL在选择方言时，请选择最短的方言-->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!--将hibernate生成的sql语句打印到控制台-->
+        <property name="show_sql">true</property>
+        <!--将hibernate生成的sql语句格式化（语法缩进）-->
+        <property name="format_sql">true</property>
+
+        <!--指定自动生成数据表的策略-->
+        <!--
+         自动导出表结构。自动建表
+        #hibernate.hbm2ddl.auto update（推荐使用）自动生成表，如果已经存在不会再生成。如果表有变动。自动更新表（不会删除任何数据）
+        -->
+        <property name="hbm2ddl.auto">update</property>
+
+
+        <mapping resource="cn/ssh/domain/LinkMan.hbm.xml"/>
+        <mapping resource="cn/ssh/domain/Customer.hbm.xml"/>
+        <mapping resource="cn/ssh/domain/User.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>
