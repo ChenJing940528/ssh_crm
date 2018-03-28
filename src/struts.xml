@@ -27,5 +27,9 @@
             <result name="toHome" type="redirect">/index.htm</result>
             <result name="error">/login.jsp</result>
         </action>
+
+        <action name="CustomerAction_*" class="customerAction" method="{1}">
+            <result name="list">/jsp/customer/list.jsp</result>
+        </action>
     </package>
 </struts>

@@ -3,8 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 读取db.properties文件 -->
     <context:property-placeholder location="classpath:db.properties"/>
@@ -51,9 +50,9 @@
     <!-- 将SessionFaction配置到spring容器中 -->
     <!-- 加载配置方案1：仍然使用外部的hibernate.cfg.xml配置信息  -->
 
-    <!--<bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
+    <!--<utils name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
         <!--<property name="configLocation" value="classpath:hibernate.cfg.xml.bak"></property>-->
-    <!--</bean>-->
+    <!--</utils>-->
     <!-- 加载配置方案2: 在spring配置中放置hibernate配置信息 -->
     <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <!-- 将连接池注入到sessionFactory，hibernate会通过连接池获得连接 -->
@@ -83,13 +82,23 @@
     <bean name="userAction" class="cn.ssh.web.action.UserAction" scope="prototype">
         <property name="userService" ref="userService"></property>
     </bean>
+    <bean name="customerAction" class="cn.ssh.web.action.CustomerAction" scope="prototype">
+        <property name="cs" ref="customerService"></property>
+    </bean>
     <!--service-->
     <bean name="userService" class="cn.ssh.service.UserServiceImpl">
         <property name="ud" ref="userDao"></property>
+    </bean>
+    <bean name="customerService" class="cn.ssh.service.CustomerServiceImpl">
+        <property name="cd" ref="customerDao"></property>
     </bean>
     <!-- dao -->
     <bean name="userDao" class="cn.ssh.dao.UserDaoImpl">
         <!--注入sessionFactory-->
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
+    <bean name="customerDao" class="cn.ssh.dao.CustomerDaoImpl">
+    <!--注入sessionFactory-->
+    <property name="sessionFactory" ref="sessionFactory"></property>
+</bean>
 </beans>
