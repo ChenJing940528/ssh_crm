@@ -1,6 +1,9 @@
 <component name="libraryTable">
   <library name="Hibernate 4.2.2-4.2.2" type="hibernate">
     <properties version="4.2.2" />
+    <ANNOTATIONS>
+      <root url="file://F:/Tomcat/apache-tomcat-7.0.52/lib" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/hibernate-commons-annotations-4.0.2.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar!/" />
@@ -18,6 +21,13 @@
       <root url="jar://F:/ssh的jar包/standard.jar!/" />
       <root url="jar://F:/ssh的jar包/jstl.jar!/" />
       <root url="jar://F:/ssh的jar包/struts2-spring-plugin-2.3.24.jar!/" />
+      <root url="jar://H:/Java视频/就业班2016/08-客户管理系统（ssh综合项目一第47-52天）/crm-day03/crm-day03/resource/jsonlib需要jar包/commons-logging-1.1.1.jar!/" />
+      <root url="jar://H:/Java视频/就业班2016/08-客户管理系统（ssh综合项目一第47-52天）/crm-day03/crm-day03/resource/jsonlib需要jar包/commons-beanutils-1.8.3.jar!/" />
+      <root url="jar://H:/Java视频/就业班2016/08-客户管理系统（ssh综合项目一第47-52天）/crm-day03/crm-day03/resource/jsonlib需要jar包/commons-collections-3.2.1.jar!/" />
+      <root url="jar://H:/Java视频/就业班2016/08-客户管理系统（ssh综合项目一第47-52天）/crm-day03/crm-day03/resource/jsonlib需要jar包/commons-lang-2.6.jar!/" />
+      <root url="jar://H:/Java视频/就业班2016/08-客户管理系统（ssh综合项目一第47-52天）/crm-day03/crm-day03/resource/jsonlib需要jar包/ezmorph-1.0.6.jar!/" />
+      <root url="jar://H:/Java视频/就业班2016/08-客户管理系统（ssh综合项目一第47-52天）/crm-day03/crm-day03/resource/jsonlib需要jar包/json-lib-2.4-jdk15.jar!/" />
+      <root url="jar://F:/Tomcat/apache-tomcat-7.0.52/lib/servlet-api.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -30,6 +30,15 @@
 
         <action name="CustomerAction_*" class="customerAction" method="{1}">
             <result name="list">/jsp/customer/list.jsp</result>
+            <result name="toList" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">CustomerAction_list</param>
+            </result>
         </action>
+
+        <!-- 数据字典Action -->
+        <action name="BaseDictAction" class="baseDictAction" method="execute"></action>
     </package>
+
+
 </struts>

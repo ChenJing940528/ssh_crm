@@ -3,7 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 读取db.properties文件 -->
     <context:property-placeholder location="classpath:db.properties"/>
@@ -20,29 +21,30 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <!-- 配置通知 -->
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-        <!--<tx:attributes>-->
-            <!--<tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>-->
-            <!--<tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>-->
-            <!--<tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>-->
-            <!--<tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>-->
-            <!--<tx:method name="delete*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>-->
-            <!--<tx:method name="remove*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>-->
-            <!--<tx:method name="get*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>-->
-            <!--<tx:method name="find*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>-->
-        <!--</tx:attributes>-->
-    <!--</tx:advice>-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="delete*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="remove*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="get*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="find*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
     <!-- 配置将通知织入目标对象
      1，配置切点
      2，配置切面
      -->
-    <!--<aop:config>-->
-        <!--<aop:pointcut id="txpc" expression="execution(* cn.ssh.service.*ServiceImpl.*(..))"></aop:pointcut>-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txpc"></aop:advisor>-->
-    <!--</aop:config>-->
+    <aop:config>
+        <aop:pointcut id="txpc" expression="execution(* cn.ssh.service.*ServiceImpl.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txpc"></aop:advisor>
+    </aop:config>
 
     <!-- 配置注解事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    <!--<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
 
 
 
@@ -85,6 +87,9 @@
     <bean name="customerAction" class="cn.ssh.web.action.CustomerAction" scope="prototype">
         <property name="cs" ref="customerService"></property>
     </bean>
+    <bean name="baseDictAction" class="cn.ssh.web.action.BaseDictAction" scope="prototype">
+        <property name="bds" ref="baseDictService"></property>
+    </bean>
     <!--service-->
     <bean name="userService" class="cn.ssh.service.UserServiceImpl">
         <property name="ud" ref="userDao"></property>
@@ -92,13 +97,20 @@
     <bean name="customerService" class="cn.ssh.service.CustomerServiceImpl">
         <property name="cd" ref="customerDao"></property>
     </bean>
+    <bean name="baseDictService" class="cn.ssh.service.BaseDictServiceImpl">
+        <property name="bdd" ref="baseDictDao"></property>
+    </bean>
     <!-- dao -->
     <bean name="userDao" class="cn.ssh.dao.UserDaoImpl">
         <!--注入sessionFactory-->
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean name="customerDao" class="cn.ssh.dao.CustomerDaoImpl">
-    <!--注入sessionFactory-->
-    <property name="sessionFactory" ref="sessionFactory"></property>
-</bean>
+        <!--注入sessionFactory-->
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean name="baseDictDao" class="cn.ssh.dao.BaseDictDaoImpl">
+        <!--注入sessionFactory-->
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
 </beans>

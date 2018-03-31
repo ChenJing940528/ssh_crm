@@ -5,8 +5,6 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.List;
 
-public interface CustomerDao {
-    Integer getTotalCount(DetachedCriteria dc);
+public interface CustomerDao extends BaseDao<Customer> {
 
-    List<Customer> getPageList(DetachedCriteria dc, int start, Integer pageSize);
 }
